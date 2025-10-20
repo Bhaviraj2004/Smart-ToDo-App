@@ -3,6 +3,7 @@ import Profile from "./Profile";
 import "./Darkmode.css"; // Make sure it has .dark class
 import { Moon } from "lucide-react";
 import { Sun } from "lucide-react";
+import { CircleUserRound } from "lucide-react";
 
 const Header = () => {
   const [showModal, setShowModal] = useState(false);
@@ -15,16 +16,16 @@ const Header = () => {
 
   // ✅ Apply dark class to <body> on toggle
   useEffect(() => {
-    const body = document.querySelector('.darkbody');
+    const body = document.querySelector(".darkbody");
     if (!body) return; // safety check
-  
+
     if (darkMode) {
-      body.classList.add('dark');
+      body.classList.add("dark");
     } else {
-      body.classList.remove('dark');
+      body.classList.remove("dark");
     }
   }, [darkMode]);
-  
+
   return (
     <>
       <div className="darkbody">
@@ -39,7 +40,7 @@ const Header = () => {
             <div className="w-full md:w-1/2">
               <input
                 type="text"
-                placeholder="Search here..."
+                placeholder="Search title here..."
                 className="w-full px-4 py-2 rounded-lg border-none focus:outline-none  text-gray-700"
                 onKeyUp={(e) => {
                   if (e.key === "Enter") {
@@ -53,16 +54,17 @@ const Header = () => {
             <div className="flex gap-4">
               <button
                 onClick={handleTogglebtn}
-                className={`${darkMode ? 'bg-black text-white' : 'bg-white text-blue-900'} font-medium px-4 py-1.5 rounded transition duration-300`}
-
+                className={`${
+                  darkMode ? "bg-black text-white" : "bg-white text-blue-900"
+                } font-medium px-4 py-1.5 rounded transition duration-300`}
               >
                 {darkMode ? <Sun /> : <Moon />}
               </button>
               <button
                 onClick={() => setShowModal(true)}
-                className="bg-white text-blue-600 font-medium px-4 py-1.5 rounded hover:bg-gray-100 transition duration-300"
+                className="bg-white text-blue-900 font-medium px-4 py-1.5 rounded hover:bg-gray-100 transition duration-300"
               >
-                Profile
+                <CircleUserRound />
               </button>
             </div>
           </div>

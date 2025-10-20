@@ -5,23 +5,22 @@ import './App.css'
 import Home from './components/Home'
 import Login from './components/Login'
 import MainScreen from './components/MainScreen'
-import SideBar from './subComponents/SideBar'
+// import SideBar from './subComponents/SideBar'
+import { useNavigate } from "react-router-dom";
+
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
 
+console.log(localStorage.getItem('token'))
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/" element={isLoggedIn ? <Navigate to="/home" /> : <Login setIsLoggedIn={setIsLoggedIn} />} />
-
         <Route path="/login" element={<Login />} />
-        {/* <Route path="/main" element={<MainScreen />} /> */}
+        <Route path="/main" element={<MainScreen />} />
       </Routes>
     </Router>
   )
 }
-
 export default App
-

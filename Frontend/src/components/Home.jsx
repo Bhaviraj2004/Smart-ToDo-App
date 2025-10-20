@@ -4,6 +4,7 @@ import welcomeright from "./image/welcome-right.png";
 import { useNavigate } from 'react-router-dom'
 import '../App.css'
 
+
 const Home = () => {
   const navigate = useNavigate()
   const goToLogin = () => {
