@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "todos",
+  "info": {
+    "singularName": "todo",
+    "pluralName": "todos",
+    "displayName": "Todo",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "date": {
+      "type": "date"
+    },
+    "priority": {
+      "type": "enumeration",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "todos"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "todos"
+    }
+  }
+}

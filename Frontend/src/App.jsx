@@ -1,26 +1,57 @@
-// App.js
-import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import './App.css'
-import Home from './components/Home'
-import Login from './components/Login'
-import MainScreen from './components/MainScreen'
-// import SideBar from './subComponents/SideBar'
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import './App.css';
+import Home from './components/Home';
+import Login from './components/Login';
+import MainScreen from './components/MainScreen';
 
+const ProtectedRoute = ({ children }) => {
+  const token = localStorage.getItem('token'); 
+  return token ? children : <Navigate to="/" replace />;
+};
+
+// Add this new component for authenticated users
+const PublicRoute = ({ children }) => {
+  const token = localStorage.getItem('token'); 
+  return !token ? children : <Navigate to="/main" replace />;
+};
 
 function App() {
-  
-
-console.log(localStorage.getItem('token'))
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/main" element={<MainScreen />} />
+        {/* Home page - only accessible if NOT logged in */}
+        <Route 
+          path="/" 
+          element={
+            <PublicRoute>
+              <Home />
+            </PublicRoute>
+          } 
+        />
+        
+        {/* Login page - only accessible if NOT logged in */}
+        <Route 
+          path="/login" 
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          } 
+        />
+
+        {/* Protected Main page - only accessible if logged in */}
+        <Route
+          path="/main"
+          element={
+            <ProtectedRoute>
+              <MainScreen />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </Router>
-  )
+  );
 }
-export default App
+
+export default App;

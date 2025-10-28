@@ -62,23 +62,51 @@ const Login = () => {
   };
 
   // ✅ Sign In Submit
-  const handleSignIn = async (e) => {
-    e.preventDefault();
+  // const handleSignIn = async (e) => {
+  //   e.preventDefault();
 
-    try {
-      const res = await axios.post("http://localhost:1337/api/auth/local", {
-        identifier: signInEmail,
-        password: signInPassword,
-      });
+  //   try {
+  //     const res = await axios.post("http://localhost:1337/api/auth/local", {
+  //       identifier: signInEmail,
+  //       password: signInPassword,
+  //     });
 
-      localStorage.setItem("token", res.data.jwt);
-      setMessage("Login Successful!");
-      navigate("/main");
-    } catch (err) {
-      console.error(err);
-      setMessage("Invalid Credentials");
-    }
-  };
+  //     localStorage.setItem("token", res.data.jwt);
+  //     setMessage("Login Successful!");
+  //     navigate("/main");
+  //   } catch (err) {
+  //     console.error(err);
+  //     setMessage("Invalid Credentials");
+  //   }
+  // };
+
+  // ✅ Sign In Submit
+const handleSignIn = async (e) => {
+  e.preventDefault();
+
+  try {
+    const res = await axios.post("http://localhost:1337/api/auth/local", {
+      identifier: signInEmail,
+      password: signInPassword,
+    });
+
+    // Token save karo
+    localStorage.setItem("token", res.data.jwt);
+
+    // 🔍 Console mein sab kuch check karne ke liye
+    console.log("✅ Login Successful!");
+    console.log("🧾 API Response Data:", res.data);
+    console.log("🗝️ Stored Token:", localStorage.getItem("token"));
+    console.log("📦 Current LocalStorage:", { ...localStorage });
+
+    setMessage("Login Successful!");
+    navigate("/main");
+  } catch (err) {
+    console.error("❌ Login Failed:", err);
+    setMessage("Invalid Credentials");
+  }
+};
+
 
   return (
     <div className="wrapper">

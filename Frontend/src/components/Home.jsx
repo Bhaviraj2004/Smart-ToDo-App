@@ -53,7 +53,7 @@ const Home = () => {
           <img 
             src={welcomeright} 
             alt="ToDo Illustration" 
-            className="w-full max-w-[240px] object-contain" 
+            className="w-full max-w-[240px] max-h-[500px] object-contain" 
           />
         </div>
       </main>
